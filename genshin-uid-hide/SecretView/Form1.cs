@@ -28,13 +28,15 @@ namespace SecretView
 
             this.TopMost = true;
             this.ControlBox = false;
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Opacity = 0.8;
+            //this.StartPosition = FormStartPosition.CenterScreen;
+            this.Opacity = 1;
             this.ShowInTaskbar = false;
-
-            Array obj = Enum.GetValues(typeof(HatchStyle));
+			//this.의 시작위치 5,5 로 설정할수 있게 해줘
+			this.StartPosition = FormStartPosition.Manual;
+			this.Location = new Point(1688, 1054);
+			Array obj = Enum.GetValues(typeof(HatchStyle));
             HatchStyle h_Style = (HatchStyle)obj.GetValue(7);//0~10
-            H_brush = new HatchBrush(h_Style, Color.White, Color.Gray);
+            H_brush = new HatchBrush(h_Style, Color.Gray, Color.Gray);
 
             timer1.Start();
         }
@@ -49,7 +51,7 @@ namespace SecretView
             }
         }
 
-        Font arial = new Font("arial",8);
+        Font arial = new Font("arial",7);
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             if (tickCount == 0)
@@ -58,13 +60,14 @@ namespace SecretView
                 //_graphics.Clear(Color.White);
 
                 _graphics.FillRectangle(H_brush, 0, 0, this.ClientSize.Width, this.ClientSize.Height);
-                _graphics.Dispose();
+				
+				_graphics.Dispose();
             }
             else
             {
                 Graphics _graphics = this.CreateGraphics();
 
-                _graphics.DrawString("창 위치와 크기를\n\n15초 내로 조절하세요.\n\n이후 프로그램 종료 때까지\n\n위치와 크기를 변경할 수 없습니다.\n\n종료는 우측하단 트레이 아이콘을\n\n클릭하면 이 프로그램은 종료됩니다.",arial,Brushes.Black,50,50);
+                _graphics.DrawString("창 위치와 크기를 15초 내로 조절하세요.\n이후 프로그램 종료 때까지 위치와 크기를 변경할 수 없습니다.\n종료는 우측하단 트레이 아이콘을 클릭하면 이 프로그램은 종료.",arial,Brushes.Black,0,0);
 
                 _graphics.Dispose();
             }
@@ -84,7 +87,7 @@ namespace SecretView
                 timer2.Start();
                 this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
                 this.Text = "고정됨 (우측하단 아이콘으로 종료)";
-                this.Opacity = 0.9;
+                this.Opacity = 1;
                 this.Invalidate();
 
                 //창 통과 클릭 활성화
@@ -106,13 +109,15 @@ namespace SecretView
         private void timer2_Tick(object sender, EventArgs e)
         {
             if (this.RectangleToScreen(this.ClientRectangle).Contains(System.Windows.Forms.Control.MousePosition) == true)
-            {
+            {//투명도조절
                 //System.Diagnostics.Debug.WriteLine("enter");
-                this.Opacity = 0.1;
-            }
+                //this.Opacity = 0.1;
+				this.Opacity = 1;
+
+			}
             else
             {
-                this.Opacity = 0.9;
+                this.Opacity =1;
             }
         }
 

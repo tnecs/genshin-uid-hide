@@ -1,4 +1,7 @@
-﻿namespace SecretView
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace SecretView
 {
     partial class Form1
     {
@@ -55,11 +58,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(354, 232);
+            this.ClientSize = new System.Drawing.Size(172, 70);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "15초 후 화면에 완전 고정됩니다.";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+
+
+			this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
 
